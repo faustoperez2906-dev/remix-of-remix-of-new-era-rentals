@@ -111,7 +111,7 @@ function Rentals() {
 
   const openAlbum = (title: string, photos: string[], products?: AlbumProduct[]) => { setAlbum({ title, photos, products }); setIdx(0); };
 
-  const CATS = [
+  const CATS: { img: string; title: string; photos: string[]; items: string[]; sizes?: string[]; products?: AlbumProduct[] }[] = [
     {
       img: a1.url,
       title: t("Tables & Chairs", "Mesas y Sillas"),
@@ -164,7 +164,7 @@ function Rentals() {
     {
       img: w1.url,
       title: t("Waterslides & Jumpers", "Resbaladillas y Brincolines"),
-      photos: [w1.url, w2.url, w3.url, w4.url, w5.url, w6.url, w7.url, w8.url, w9.url, n8.url, n9.url, n10.url],
+      photos: [...INFLATABLES.map((i) => i.img), w9.url, n9.url, n10.url],
       products: INFLATABLES,
       items: [
         t("Bounce houses & castle jumpers", "Brincolines y castillos inflables"),
