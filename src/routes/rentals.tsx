@@ -285,7 +285,7 @@ function Rentals() {
           <article key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card/40">
             <button
               type="button"
-              onClick={() => openAlbum(c.title, c.photos)}
+              onClick={() => openAlbum(c.title, c.photos, c.products)}
               className="group relative block w-full"
               aria-label={t(`View ${c.title} photos`, `Ver fotos de ${c.title}`)}
             >
@@ -295,9 +295,16 @@ function Rentals() {
               </span>
             </button>
             <div className="p-6">
-              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="font-display text-2xl text-left hover:text-primary transition-colors">
+              <button type="button" onClick={() => openAlbum(c.title, c.photos, c.products)} className="font-display text-2xl text-left hover:text-primary transition-colors">
                 {c.title}
               </button>
+              {c.sizes && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {c.sizes.map((s) => (
+                    <span key={s} className="rounded-full border border-primary/40 bg-card/60 px-3 py-1 text-xs font-semibold text-foreground">{s}</span>
+                  ))}
+                </div>
+              )}
               <ul className="mt-4 space-y-2">
                 {c.items.map((i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -309,7 +316,7 @@ function Rentals() {
               <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                 <Phone className="w-3 h-3" /> {t("Call for pricing", "Llame por precios")}
               </div>
-              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="text-sm text-primary hover:underline">
+              <button type="button" onClick={() => openAlbum(c.title, c.photos, c.products)} className="text-sm text-primary hover:underline">
                 {t("See options →", "Ver opciones →")}
               </button>
               </div>
@@ -317,39 +324,6 @@ function Rentals() {
           </article>
         ))}
       </section>
-
-      {section(
-        "inflatables",
-        t("Inflatables", "Inflables"),
-        t("Bounce houses & water slides", "Brincolines y resbaladillas"),
-        t(
-          "Available wet or dry. Delivery, setup and pickup included — just tell us which one you want.",
-          "Disponibles con o sin agua. Entrega, instalación y recolección incluidas — solo díganos cuál quiere.",
-        ),
-        INFLATABLES,
-      )}
-
-      <section id="canopies" className="mx-auto max-w-7xl px-5 md:px-8 pb-6">
-        <div className="text-xs tracking-widest uppercase text-primary">{t("Canopy Sizes", "Tamaños de Toldos")}</div>
-        <h2 className="mt-2 font-display text-3xl md:text-5xl font-bold">{t("Any size you need", "El tamaño que necesite")}</h2>
-        <div className="mt-6 flex flex-wrap gap-3">
-          {CANOPY_SIZES.map((s) => (
-            <span key={s} className="rounded-full border border-primary/40 bg-card/60 px-5 py-2 text-sm font-semibold text-foreground">{s}</span>
-          ))}
-        </div>
-      </section>
-
-      {section(
-        "tents-canopies",
-        t("Tents & Canopies", "Carpas y Toldos"),
-        t("Shade & draping", "Sombra y draping"),
-        t(
-          "From simple pop-up canopies to fully draped tents with lighting and sidewalls.",
-          "Desde toldos sencillos hasta carpas con draping completo, iluminación y paredes.",
-        ),
-        TENTS,
-        true,
-      )}
 
       {section(
         "machines",
