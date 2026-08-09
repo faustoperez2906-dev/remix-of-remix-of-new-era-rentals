@@ -110,11 +110,16 @@ export const Route = createFileRoute("/rentals")({
 
 function Rentals() {
   const { t } = useLang();
+  const [album, setAlbum] = useState<{ title: string; photos: string[] } | null>(null);
+  const [idx, setIdx] = useState(0);
+
+  const openAlbum = (title: string, photos: string[]) => { setAlbum({ title, photos }); setIdx(0); };
 
   const CATS = [
     {
       img: a1.url,
       title: t("Tables & Chairs", "Mesas y Sillas"),
+      photos: [a1.url, a2.url, a3.url, a8.url, a9.url, a10.url],
       items: [
         t("White chairs, black chairs & white resting chairs", "Sillas blancas, negras y sillas de descanso blancas"),
         t("Round banquet tables (60\" / 72\")", "Mesas redondas de banquete (60\" / 72\")"),
@@ -127,6 +132,7 @@ function Rentals() {
     {
       img: t5.url,
       title: t("Tents & Canopies", "Carpas y Toldos"),
+      photos: [t1.url, t2.url, t3.url, t4.url, t5.url, t6.url, t9.url, t10.url, t11.url, t12.url, n1.url, n2.url, n3.url, n5.url, n6.url],
       items: [
         t("10x10, 10x20, 10x30, 10x40 canopies", "Toldos 10x10, 10x20, 10x30, 10x40"),
         t("20x20, 20x30, 20x40 and larger tents", "Carpas 20x20, 20x30, 20x40 y más grandes"),
@@ -138,6 +144,7 @@ function Rentals() {
     {
       img: a7.url,
       title: t("Lighting, Sound & Stage", "Iluminación, Sonido y Escenario"),
+      photos: [a7.url, m7.url, m9.url, m1.url, m2.url, m3.url, m4.url, m5.url, m6.url],
       items: [
         t("Giant light-up marquee letters & numbers", "Letras y números luminosos gigantes"),
         t("Custom names, XV, 18, 50 and more", "Nombres personalizados, XV, 18, 50 y más"),
@@ -149,6 +156,7 @@ function Rentals() {
     {
       img: a4.url,
       title: t("Backdrops", "Fondos (Backdrops)"),
+      photos: [a4.url, a5.url, m3.url, m7.url, m2.url, n2.url],
       items: [
         t("Backdrops", "Backdrops"),
         t("Shimmer walls & sequin panels", "Paredes brillantes y paneles de lentejuela"),
@@ -159,6 +167,7 @@ function Rentals() {
     {
       img: w1.url,
       title: t("Waterslides & Jumpers", "Resbaladillas y Brincolines"),
+      photos: [w1.url, w2.url, w3.url, w4.url, w5.url, w6.url, w7.url, w8.url, w9.url, n8.url, n9.url, n10.url],
       items: [
         t("Bounce houses & castle jumpers", "Brincolines y castillos inflables"),
         t("Combo jumpers with slides", "Combos con resbaladilla"),
@@ -169,6 +178,7 @@ function Rentals() {
     {
       img: a6.url,
       title: t("Machines & Catering", "Máquinas y Banquetes"),
+      photos: [t7.url, t8.url, a6.url],
       items: [
         t("Margarita & slushy machines", "Máquinas de margaritas y raspados"),
         t("Snow cone machine", "Máquina de raspados / conos de nieve"),
