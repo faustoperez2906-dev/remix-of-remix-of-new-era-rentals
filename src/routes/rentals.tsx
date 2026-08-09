@@ -175,7 +175,7 @@ function Rentals() {
     {
       img: a6.url,
       title: t("Machines & Catering", "Máquinas y Banquetes"),
-      photos: [t7.url, t8.url, a6.url],
+      photos: [t7.url, a6.url],
       items: [
         t("Margarita & slushy machines", "Máquinas de margaritas y raspados"),
         t("Snow cone machine", "Máquina de raspados / conos de nieve"),
