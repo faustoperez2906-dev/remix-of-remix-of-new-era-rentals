@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Layout, EMAIL, PHONE, PHONE_HREF } from "@/components/Layout";
+import { Layout, PHONE, PHONE_HREF } from "@/components/Layout";
 import { useLang } from "@/lib/i18n";
 import { useState } from "react";
 import { z } from "zod";
-import { Send, CheckCircle2, Phone } from "lucide-react";
+import { Send, CheckCircle2, Phone, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Name is required").max(80),
@@ -15,6 +16,7 @@ const schema = z.object({
   location: z.string().trim().max(160).optional(),
   deliveryMethod: z.string().min(1, "Choose delivery or pickup"),
   setupLevel: z.string().min(1, "Choose ground or upper level"),
+  setupService: z.string().min(1, "Choose setup & breakdown option"),
   message: z.string().trim().max(1000).optional(),
 });
 
@@ -34,8 +36,10 @@ function Quote() {
   const { t } = useLang();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const data = Object.fromEntries(fd.entries()) as Record<string, string>;
@@ -47,23 +51,26 @@ function Quote() {
       return;
     }
     setErrors({});
-    // Compose mailto so the request reaches the business immediately.
-    const subject = `Quote request — ${r.data.eventType} on ${r.data.eventDate}`;
-    const body = [
-      `Name: ${r.data.name}`,
-      `Phone: ${r.data.phone}`,
-      `Email: ${r.data.email}`,
-      `Event date: ${r.data.eventDate}`,
-      `Event type: ${r.data.eventType}`,
-      `Guest count: ${r.data.guests ?? ""}`,
-      `Location: ${r.data.location ?? ""}`,
-      `Delivery / pickup: ${r.data.deliveryMethod}`,
-      `Setup level: ${r.data.setupLevel}`,
-      "",
-      "Details:",
-      r.data.message ?? "",
-    ].join("\n");
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSubmitError("");
+    setSubmitting(true);
+    const { error } = await supabase.from("quote_requests").insert({
+      name: r.data.name,
+      email: r.data.email,
+      phone: r.data.phone,
+      event_date: r.data.eventDate,
+      event_type: r.data.eventType,
+      guests: r.data.guests || null,
+      location: r.data.location || null,
+      delivery_method: r.data.deliveryMethod,
+      setup_level: r.data.setupLevel,
+      setup_service: r.data.setupService,
+      message: r.data.message || null,
+    });
+    setSubmitting(false);
+    if (error) {
+      setSubmitError(t("Something went wrong sending your request. Please call us instead.", "Hubo un problema al enviar su solicitud. Por favor llámenos."));
+      return;
+    }
     setSent(true);
   };
 
@@ -84,15 +91,15 @@ function Quote() {
           <ul className="mt-4 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">
             <li className="flex items-start gap-2">
               <span className="text-primary">•</span>
-              {t("Delivery and pickup are both charged based on distance from our location.", "La entrega y la recolección tienen un cargo según la distancia desde nuestra ubicación.")}
+              {t("Delivery and pickup fees are charged based on the amount of rentals and the distance from our location.", "Las tarifas de entrega y recolección se cobran según la cantidad de rentas y la distancia desde nuestra ubicación.")}
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary">•</span>
-              {t("Please tell us if the setup is ground level or upper level.", "Por favor indique si la instalación será a nivel de suelo o en un nivel superior.")}
+              {t("Fees also depend on whether the setup is ground level or upper level / stairs.", "La tarifa también depende de si la instalación es a nivel de suelo o en un nivel superior / escaleras.")}
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary">•</span>
-              {t("Setup and breakdown are included with most rentals.", "La instalación y desmontaje están incluidos en la mayoría de las rentas.")}
+              {t("Setup and breakdown services are available upon request for an extra cost.", "Los servicios de instalación y desmontaje están disponibles bajo pedido por un costo adicional.")}
             </li>
           </ul>
         </div>
@@ -103,7 +110,7 @@ function Quote() {
           <div className="rounded-2xl border border-primary/40 bg-card p-10 text-center">
             <CheckCircle2 className="w-12 h-12 text-primary mx-auto" />
             <h2 className="mt-4 font-display text-3xl">{t("Thank you!", "¡Gracias!")}</h2>
-            <p className="mt-2 text-muted-foreground">{t("Your email client just opened with your quote request. Send it off and we'll be in touch within 24 hours.", "Se abrió su correo con la solicitud. Envíela y nos comunicamos en 24 horas.")}</p>
+            <p className="mt-2 text-muted-foreground">{t("We received your quote request and will be in touch within 24 hours.", "Recibimos su solicitud de cotización y nos comunicaremos en 24 horas.")}</p>
             <a href={PHONE_HREF} className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-gold text-primary-foreground px-6 py-3 font-semibold">
               <Phone className="w-4 h-4" /> {t("Or call", "O llame al")} {PHONE}
             </a>
@@ -172,12 +179,25 @@ function Quote() {
               {errors.setupLevel && <p className="mt-1 text-xs text-destructive">{errors.setupLevel}</p>}
             </div>
             <div className="md:col-span-2">
+              <label className="text-sm text-muted-foreground">{t("Setup & breakdown service (extra cost)", "Servicio de instalación y desmontaje (costo adicional)")}</label>
+              <select name="setupService" className={field} defaultValue="">
+                <option value="" disabled>{t("Select...", "Seleccione...")}</option>
+                <option>{t("Yes — please add setup & breakdown", "Sí — agregar instalación y desmontaje")}</option>
+                <option>{t("Setup only", "Solo instalación")}</option>
+                <option>{t("No — we'll handle it ourselves", "No — nosotros nos encargamos")}</option>
+                <option>{t("Not sure yet", "Aún no estoy seguro")}</option>
+              </select>
+              {errors.setupService && <p className="mt-1 text-xs text-destructive">{errors.setupService}</p>}
+            </div>
+            <div className="md:col-span-2">
               <label className="text-sm text-muted-foreground">{t("What do you need? (Optional)", "¿Qué necesita? (Opcional)")}</label>
               <textarea name="message" rows={5} className={field} maxLength={1000} placeholder={t("Canopies, chairs, tables, inflatables, lighting, sound...", "Toldos, sillas, mesas, inflables, iluminación, sonido...")} />
             </div>
-            <div className="md:col-span-2 flex justify-end">
-              <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-gradient-gold text-primary-foreground px-7 py-3.5 font-semibold shadow-gold">
-                {t("Send Request", "Enviar Solicitud")} <Send className="w-4 h-4" />
+            <div className="md:col-span-2 flex items-center justify-end gap-4">
+              {submitError && <p className="text-sm text-destructive">{submitError}</p>}
+              <button type="submit" disabled={submitting} className="inline-flex items-center gap-2 rounded-full bg-gradient-gold text-primary-foreground px-7 py-3.5 font-semibold shadow-gold disabled:opacity-60">
+                {submitting ? t("Sending...", "Enviando...") : t("Send Request", "Enviar Solicitud")}
+                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
               </button>
             </div>
           </form>
