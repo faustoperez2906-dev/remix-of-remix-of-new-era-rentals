@@ -425,6 +425,55 @@ function Rentals() {
           <Link to="/quote" className="mt-6 inline-flex rounded-full bg-gradient-gold text-primary-foreground px-6 py-3 font-semibold shadow-gold">{t("Build my package", "Armar mi paquete")}</Link>
         </div>
       </section>
+
+      {album && (
+        <div className="fixed inset-0 z-[60] bg-background/95 backdrop-blur overflow-y-auto p-4 md:p-8" onClick={() => setAlbum(null)}>
+          <div className="mx-auto max-w-5xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="font-display text-2xl">{album.title}</h2>
+              <button onClick={() => setAlbum(null)} aria-label={t("Close", "Cerrar")} className="p-2 text-foreground hover:text-primary">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="relative mt-4">
+              <img src={album.photos[idx]} alt={`${album.title} ${idx + 1}`} className="w-full max-h-[65vh] object-contain rounded-xl border border-border bg-card" />
+              {album.photos.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setIdx((i) => (i - 1 + album.photos.length) % album.photos.length)}
+                    aria-label={t("Previous", "Anterior")}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 border border-border p-2 hover:text-primary"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={() => setIdx((i) => (i + 1) % album.photos.length)}
+                    aria-label={t("Next", "Siguiente")}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 border border-border p-2 hover:text-primary"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </>
+              )}
+            </div>
+            <div className="mt-4 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+              {album.photos.map((p, i) => (
+                <button key={p + i} onClick={() => setIdx(i)} className={`overflow-hidden rounded-lg border ${i === idx ? "border-primary" : "border-border"}`}>
+                  <img src={p} alt="" className="h-16 w-full object-cover" loading="lazy" />
+                </button>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3 justify-center pb-6">
+              <a href={PHONE_HREF} className="inline-flex items-center gap-2 rounded-full bg-gradient-gold text-primary-foreground px-6 py-3 text-sm font-semibold shadow-gold">
+                <Phone className="w-4 h-4" /> {PHONE}
+              </a>
+              <Link to="/quote" className="inline-flex items-center rounded-full border border-primary/50 px-6 py-3 text-sm font-semibold text-foreground hover:bg-primary/10">
+                {t("Request a Quote", "Pedir Cotización")}
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }
