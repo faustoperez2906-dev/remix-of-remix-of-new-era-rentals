@@ -75,13 +75,8 @@ const INFLATABLES = [
   
 ];
 
-const TENTS = [
-  { img: t1.url, name: "20x20 Frame Tent", en: "Driveway or backyard • string lights available", es: "Cochera o patio • luces disponibles" },
-];
-
 const MACHINES = [
   { img: t7.url, name: "Double Margarita / Slushy Machine", en: "Two flavors • mixes available on request", es: "Dos sabores • mezclas disponibles" },
-  { img: t8.url, name: "Margarita Machine with Cart", en: "Delivered ready to serve", es: "Entregada lista para servir" },
 ];
 
 const MACHINE_EXTRAS = [
@@ -110,10 +105,11 @@ export const Route = createFileRoute("/rentals")({
 
 function Rentals() {
   const { t } = useLang();
-  const [album, setAlbum] = useState<{ title: string; photos: string[] } | null>(null);
+  type AlbumProduct = { img: string; name: string; en: string; es: string };
+  const [album, setAlbum] = useState<{ title: string; photos: string[]; products?: AlbumProduct[] } | null>(null);
   const [idx, setIdx] = useState(0);
 
-  const openAlbum = (title: string, photos: string[]) => { setAlbum({ title, photos }); setIdx(0); };
+  const openAlbum = (title: string, photos: string[], products?: AlbumProduct[]) => { setAlbum({ title, photos, products }); setIdx(0); };
 
   const CATS = [
     {
