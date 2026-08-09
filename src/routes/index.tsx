@@ -75,9 +75,9 @@ function Home() {
       <section className="border-y border-border bg-card/40">
         <div className="mx-auto max-w-7xl px-5 md:px-8 py-10 grid gap-8 md:grid-cols-3">
           {[
-            { icon: Sparkles, title: t("Curated Luxury", "Lujo Seleccionado"), body: t("White chairs, black chairs, resting chairs, elegant canopies and linens.", "Sillas blancas, negras, de descanso, toldos elegantes y manteles.") },
+            { icon: Sparkles, title: t("Curated Luxury", "Lujo Seleccionado"), body: t("Resin chairs, canopies, linens and much more.", "Sillas de resina, toldos, manteles y mucho más.") },
             { icon: Truck, title: t("Delivery & Pickup", "Entrega y Recolección"), body: t("Delivery and pickup fees are based on the amount of rentals, ground or upper level setup, and distance from our location. Setup and breakdown services are available upon request for an extra cost.", "Las tarifas de entrega y recolección dependen de la cantidad de rentas, si la instalación es a nivel de suelo o superior, y la distancia desde nuestra ubicación. Los servicios de instalación y desmontaje están disponibles bajo pedido por un costo adicional.") },
-            { icon: Star, title: t("5-Star Service", "Servicio 5 Estrellas"), body: t("Local East LA team obsessed with your event's success.", "Equipo local del Este de LA dedicado al éxito de su evento.") },
+            { icon: Star, title: t("5-Star Service", "Servicio 5 Estrellas"), body: t("Professional employees and delivery.", "Empleados profesionales y entrega.") },
           ].map(({ icon: Icon, title, body }) => (
             <div key={title} className="flex gap-4">
               <div className="w-11 h-11 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">

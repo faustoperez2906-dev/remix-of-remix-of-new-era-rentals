@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Layout, PHONE, PHONE_HREF } from "@/components/Layout";
 import { useLang } from "@/lib/i18n";
-import { Check, Music, Lightbulb, Snowflake, Coffee, Crown, Flame, Truck, ArrowUp, Phone, X, ChevronLeft, ChevronRight, Images } from "lucide-react";
+import { Check, Snowflake, Coffee, Crown, Flame, Truck, ArrowUp, Phone, X, ChevronLeft, ChevronRight, Images } from "lucide-react";
 import a1 from "@/assets/IMG_4867.jpg.asset.json";
 import a4 from "@/assets/IMG_4865.jpg.asset.json";
 import a6 from "@/assets/IMG_4866.jpg.asset.json";
@@ -40,7 +40,6 @@ import t4 from "@/assets/IMG_4911.jpeg.asset.json";
 import t5 from "@/assets/IMG_4910.jpeg.asset.json";
 import t6 from "@/assets/IMG_4909.jpeg.asset.json";
 import t7 from "@/assets/IMG_4915.jpeg.asset.json";
-import t8 from "@/assets/IMG_4916.jpeg.asset.json";
 import t9 from "@/assets/IMG_4925.jpeg.asset.json";
 import t10 from "@/assets/IMG_4924.jpeg.asset.json";
 import t11 from "@/assets/IMG_4922.jpeg.asset.json";
@@ -75,13 +74,8 @@ const INFLATABLES = [
   
 ];
 
-const TENTS = [
-  { img: t1.url, name: "20x20 Frame Tent", en: "Driveway or backyard • string lights available", es: "Cochera o patio • luces disponibles" },
-];
-
 const MACHINES = [
   { img: t7.url, name: "Double Margarita / Slushy Machine", en: "Two flavors • mixes available on request", es: "Dos sabores • mezclas disponibles" },
-  { img: t8.url, name: "Margarita Machine with Cart", en: "Delivered ready to serve", es: "Entregada lista para servir" },
 ];
 
 const MACHINE_EXTRAS = [
@@ -110,12 +104,13 @@ export const Route = createFileRoute("/rentals")({
 
 function Rentals() {
   const { t } = useLang();
-  const [album, setAlbum] = useState<{ title: string; photos: string[] } | null>(null);
+  type AlbumProduct = { img: string; name: string; en: string; es: string };
+  const [album, setAlbum] = useState<{ title: string; photos: string[]; products?: AlbumProduct[] } | null>(null);
   const [idx, setIdx] = useState(0);
 
-  const openAlbum = (title: string, photos: string[]) => { setAlbum({ title, photos }); setIdx(0); };
+  const openAlbum = (title: string, photos: string[], products?: AlbumProduct[]) => { setAlbum({ title, photos, products }); setIdx(0); };
 
-  const CATS = [
+  const CATS: { img: string; title: string; photos: string[]; items: string[]; sizes?: string[]; products?: AlbumProduct[] }[] = [
     {
       img: a1.url,
       title: t("Tables & Chairs", "Mesas y Sillas"),
@@ -133,6 +128,7 @@ function Rentals() {
       img: t5.url,
       title: t("Tents & Canopies", "Carpas y Toldos"),
       photos: [t1.url, t2.url, t3.url, t4.url, t5.url, t6.url, t9.url, t10.url, t11.url, t12.url, n1.url, n2.url, n3.url, n5.url, n6.url],
+      sizes: CANOPY_SIZES,
       items: [
         t("10x10, 10x20, 10x30, 10x40 canopies", "Toldos 10x10, 10x20, 10x30, 10x40"),
         t("20x20, 20x30, 20x40 and larger tents", "Carpas 20x20, 20x30, 20x40 y más grandes"),
@@ -167,7 +163,8 @@ function Rentals() {
     {
       img: w1.url,
       title: t("Waterslides & Jumpers", "Resbaladillas y Brincolines"),
-      photos: [w1.url, w2.url, w3.url, w4.url, w5.url, w6.url, w7.url, w8.url, w9.url, n8.url, n9.url, n10.url],
+      photos: [...INFLATABLES.map((i) => i.img), w9.url, n9.url, n10.url],
+      products: INFLATABLES,
       items: [
         t("Bounce houses & castle jumpers", "Brincolines y castillos inflables"),
         t("Combo jumpers with slides", "Combos con resbaladilla"),
@@ -178,7 +175,7 @@ function Rentals() {
     {
       img: a6.url,
       title: t("Machines & Catering", "Máquinas y Banquetes"),
-      photos: [t7.url, t8.url, a6.url],
+      photos: [t7.url, a6.url],
       items: [
         t("Margarita & slushy machines", "Máquinas de margaritas y raspados"),
         t("Snow cone machine", "Máquina de raspados / conos de nieve"),
@@ -287,7 +284,7 @@ function Rentals() {
           <article key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card/40">
             <button
               type="button"
-              onClick={() => openAlbum(c.title, c.photos)}
+              onClick={() => openAlbum(c.title, c.photos, c.products)}
               className="group relative block w-full"
               aria-label={t(`View ${c.title} photos`, `Ver fotos de ${c.title}`)}
             >
@@ -297,9 +294,16 @@ function Rentals() {
               </span>
             </button>
             <div className="p-6">
-              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="font-display text-2xl text-left hover:text-primary transition-colors">
+              <button type="button" onClick={() => openAlbum(c.title, c.photos, c.products)} className="font-display text-2xl text-left hover:text-primary transition-colors">
                 {c.title}
               </button>
+              {c.sizes && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {c.sizes.map((s) => (
+                    <span key={s} className="rounded-full border border-primary/40 bg-card/60 px-3 py-1 text-xs font-semibold text-foreground">{s}</span>
+                  ))}
+                </div>
+              )}
               <ul className="mt-4 space-y-2">
                 {c.items.map((i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -311,7 +315,7 @@ function Rentals() {
               <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                 <Phone className="w-3 h-3" /> {t("Call for pricing", "Llame por precios")}
               </div>
-              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="text-sm text-primary hover:underline">
+              <button type="button" onClick={() => openAlbum(c.title, c.photos, c.products)} className="text-sm text-primary hover:underline">
                 {t("See options →", "Ver opciones →")}
               </button>
               </div>
@@ -319,39 +323,6 @@ function Rentals() {
           </article>
         ))}
       </section>
-
-      {section(
-        "inflatables",
-        t("Inflatables", "Inflables"),
-        t("Bounce houses & water slides", "Brincolines y resbaladillas"),
-        t(
-          "Available wet or dry. Delivery, setup and pickup included — just tell us which one you want.",
-          "Disponibles con o sin agua. Entrega, instalación y recolección incluidas — solo díganos cuál quiere.",
-        ),
-        INFLATABLES,
-      )}
-
-      <section id="canopies" className="mx-auto max-w-7xl px-5 md:px-8 pb-6">
-        <div className="text-xs tracking-widest uppercase text-primary">{t("Canopy Sizes", "Tamaños de Toldos")}</div>
-        <h2 className="mt-2 font-display text-3xl md:text-5xl font-bold">{t("Any size you need", "El tamaño que necesite")}</h2>
-        <div className="mt-6 flex flex-wrap gap-3">
-          {CANOPY_SIZES.map((s) => (
-            <span key={s} className="rounded-full border border-primary/40 bg-card/60 px-5 py-2 text-sm font-semibold text-foreground">{s}</span>
-          ))}
-        </div>
-      </section>
-
-      {section(
-        "tents-canopies",
-        t("Tents & Canopies", "Carpas y Toldos"),
-        t("Shade & draping", "Sombra y draping"),
-        t(
-          "From simple pop-up canopies to fully draped tents with lighting and sidewalls.",
-          "Desde toldos sencillos hasta carpas con draping completo, iluminación y paredes.",
-        ),
-        TENTS,
-        true,
-      )}
 
       {section(
         "machines",
@@ -378,32 +349,6 @@ function Rentals() {
             <div><Link to="/quote" className="mt-3 inline-flex text-sm text-primary hover:underline">{t("Add to my quote →", "Agregar a mi cotización →")}</Link></div>
           </article>
         ))}
-      </section>
-
-      <section id="sound-lighting-stage" className="mx-auto max-w-7xl px-5 md:px-8 pb-20">
-        <div className="text-xs tracking-widest uppercase text-primary">{t("Sound, Lighting & Stage", "Sonido, Iluminación y Escenario")}</div>
-        <h2 className="mt-2 font-display text-3xl md:text-5xl font-bold">{t("Set the mood", "Ponga el ambiente")}</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {[
-            { icon: Music, title: t("Sound", "Sonido"), items: [t("Speakers & subwoofers", "Bocinas y subwoofers"), t("Wireless microphones", "Micrófonos inalámbricos"), t("DJ setups & mixers", "Equipo de DJ y mezcladoras")] },
-            { icon: Lightbulb, title: t("Lighting", "Iluminación"), items: [t("Marquee letters & numbers", "Letras y números luminosos"), t("LED uplighting", "Iluminación LED"), t("String / bistro lights & chandeliers", "Luces colgantes y candiles")] },
-            { icon: Crown, title: t("Stage", "Escenario"), items: [t("Stage risers in multiple sizes", "Tarimas en varios tamaños"), t("Skirting & carpet finish", "Faldón y alfombra"), t("Steps & railings", "Escalones y barandales")] },
-          ].map((c) => (
-            <article key={c.title} className="rounded-2xl border border-border bg-card/40 p-6">
-              <div className="w-11 h-11 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
-                <c.icon className="w-5 h-5 text-primary" />
-              </div>
-              <h3 className="mt-4 font-display text-xl">{c.title}</h3>
-              <ul className="mt-3 space-y-2">
-                {c.items.map((i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" /> {i}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
       </section>
 
       {section(
@@ -456,6 +401,15 @@ function Rentals() {
                 </>
               )}
             </div>
+            {album.products?.[idx] && (
+              <div className="mt-4 rounded-xl border border-border bg-card/60 p-5">
+                <h3 className="font-display text-xl">{album.products[idx].name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{t(album.products[idx].en, album.products[idx].es)}</p>
+                <Link to="/quote" className="mt-3 inline-flex rounded-full bg-gradient-gold text-primary-foreground px-5 py-2.5 text-sm font-semibold shadow-gold">
+                  {t("Reserve this one", "Reservar este")}
+                </Link>
+              </div>
+            )}
             <div className="mt-4 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
               {album.photos.map((p, i) => (
                 <button key={p + i} onClick={() => setIdx(i)} className={`overflow-hidden rounded-lg border ${i === idx ? "border-primary" : "border-border"}`}>
