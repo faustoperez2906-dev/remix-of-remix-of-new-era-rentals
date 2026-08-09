@@ -129,6 +129,7 @@ function Rentals() {
       img: t5.url,
       title: t("Tents & Canopies", "Carpas y Toldos"),
       photos: [t1.url, t2.url, t3.url, t4.url, t5.url, t6.url, t9.url, t10.url, t11.url, t12.url, n1.url, n2.url, n3.url, n5.url, n6.url],
+      sizes: CANOPY_SIZES,
       items: [
         t("10x10, 10x20, 10x30, 10x40 canopies", "Toldos 10x10, 10x20, 10x30, 10x40"),
         t("20x20, 20x30, 20x40 and larger tents", "Carpas 20x20, 20x30, 20x40 y más grandes"),
@@ -164,6 +165,7 @@ function Rentals() {
       img: w1.url,
       title: t("Waterslides & Jumpers", "Resbaladillas y Brincolines"),
       photos: [w1.url, w2.url, w3.url, w4.url, w5.url, w6.url, w7.url, w8.url, w9.url, n8.url, n9.url, n10.url],
+      products: INFLATABLES,
       items: [
         t("Bounce houses & castle jumpers", "Brincolines y castillos inflables"),
         t("Combo jumpers with slides", "Combos con resbaladilla"),
