@@ -352,32 +352,6 @@ function Rentals() {
         ))}
       </section>
 
-      <section id="sound-lighting-stage" className="mx-auto max-w-7xl px-5 md:px-8 pb-20">
-        <div className="text-xs tracking-widest uppercase text-primary">{t("Sound, Lighting & Stage", "Sonido, Iluminación y Escenario")}</div>
-        <h2 className="mt-2 font-display text-3xl md:text-5xl font-bold">{t("Set the mood", "Ponga el ambiente")}</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {[
-            { icon: Music, title: t("Sound", "Sonido"), items: [t("Speakers & subwoofers", "Bocinas y subwoofers"), t("Wireless microphones", "Micrófonos inalámbricos"), t("DJ setups & mixers", "Equipo de DJ y mezcladoras")] },
-            { icon: Lightbulb, title: t("Lighting", "Iluminación"), items: [t("Marquee letters & numbers", "Letras y números luminosos"), t("LED uplighting", "Iluminación LED"), t("String / bistro lights & chandeliers", "Luces colgantes y candiles")] },
-            { icon: Crown, title: t("Stage", "Escenario"), items: [t("Stage risers in multiple sizes", "Tarimas en varios tamaños"), t("Skirting & carpet finish", "Faldón y alfombra"), t("Steps & railings", "Escalones y barandales")] },
-          ].map((c) => (
-            <article key={c.title} className="rounded-2xl border border-border bg-card/40 p-6">
-              <div className="w-11 h-11 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
-                <c.icon className="w-5 h-5 text-primary" />
-              </div>
-              <h3 className="mt-4 font-display text-xl">{c.title}</h3>
-              <ul className="mt-3 space-y-2">
-                {c.items.map((i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" /> {i}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
       {section(
         "heaters",
         t("Patio Heaters & Power", "Calentadores y Energía"),
@@ -428,6 +402,15 @@ function Rentals() {
                 </>
               )}
             </div>
+            {album.products?.[idx] && (
+              <div className="mt-4 rounded-xl border border-border bg-card/60 p-5">
+                <h3 className="font-display text-xl">{album.products[idx].name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{t(album.products[idx].en, album.products[idx].es)}</p>
+                <Link to="/quote" className="mt-3 inline-flex rounded-full bg-gradient-gold text-primary-foreground px-5 py-2.5 text-sm font-semibold shadow-gold">
+                  {t("Reserve this one", "Reservar este")}
+                </Link>
+              </div>
+            )}
             <div className="mt-4 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
               {album.photos.map((p, i) => (
                 <button key={p + i} onClick={() => setIdx(i)} className={`overflow-hidden rounded-lg border ${i === idx ? "border-primary" : "border-border"}`}>
