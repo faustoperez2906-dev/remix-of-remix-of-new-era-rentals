@@ -174,7 +174,7 @@ function Rentals() {
       ],
     },
     {
-      img: a6.url,
+      img: t7.url,
       title: t("Machines & Catering", "Máquinas y Banquetes"),
       photos: [t7.url, a6.url],
       products: MACHINES,
