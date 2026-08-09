@@ -103,7 +103,7 @@ function Home() {
         </div>
         <div className="grid gap-5 md:grid-cols-3">
           {[
-            { img: g2, title: t("Tables & Chairs", "Mesas y Sillas"), body: t("White chairs, black chairs, resting chairs & barstools.", "Sillas blancas, negras, de descanso y bancos altos.") },
+            { img: g2, title: t("Tables & Chairs", "Mesas y Sillas"), body: t("White resin chairs, round banquet tables (48\"/60\") and 4ft, 6ft & 8ft rectangular tables.", "Sillas de resina blancas, mesas redondas de banquete (48\"/60\") y mesas rectangulares de 4, 6 y 8 pies.") },
             { img: g1, title: t("Lighting, Sound & Stage", "Iluminación, Sonido y Escenario"), body: t("Marquee letters, uplighting, sound & stage.", "Letras luminosas, iluminación, sonido y escenario.") },
             { img: g3, title: t("Backdrops & Decor", "Backdrops y Decoración"), body: t("Backdrops, throne chairs, draping & linens.", "Backdrops, sillas de trono, draping y manteles.") },
           ].map((c) => (
