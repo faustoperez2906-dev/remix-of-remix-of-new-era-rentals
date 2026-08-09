@@ -1,11 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { Layout, PHONE, PHONE_HREF } from "@/components/Layout";
 import { useLang } from "@/lib/i18n";
-import { Check, Music, Lightbulb, Snowflake, Coffee, Crown, Flame, Truck, ArrowUp, Phone } from "lucide-react";
+import { Check, Music, Lightbulb, Snowflake, Coffee, Crown, Flame, Truck, ArrowUp, Phone, X, ChevronLeft, ChevronRight, Images } from "lucide-react";
 import a1 from "@/assets/IMG_4867.jpg.asset.json";
 import a4 from "@/assets/IMG_4865.jpg.asset.json";
 import a6 from "@/assets/IMG_4866.jpg.asset.json";
 import a7 from "@/assets/20251108_134224.jpeg.asset.json";
+import a2 from "@/assets/IMG_4602.jpg.asset.json";
+import a3 from "@/assets/IMG_4605.jpg.asset.json";
+import a5 from "@/assets/IMG_4863.jpg.asset.json";
+import a8 from "@/assets/IMG_4864.jpg.asset.json";
+import a9 from "@/assets/IMG_4868.jpg.asset.json";
+import a10 from "@/assets/IMG_4869.jpg.asset.json";
+import m1 from "@/assets/1000010304.jpeg.asset.json";
+import m2 from "@/assets/1000010543.jpeg.asset.json";
+import m3 from "@/assets/1000011079.jpeg.asset.json";
+import m4 from "@/assets/1000019155.jpeg.asset.json";
+import m5 from "@/assets/1000019153.jpeg.asset.json";
+import m6 from "@/assets/1000038124.jpeg.asset.json";
+import m7 from "@/assets/20251108_134207.jpeg.asset.json";
+import m9 from "@/assets/20251108_134215.jpeg.asset.json";
 import w1 from "@/assets/IMG_4905.jpeg.asset.json";
 import w2 from "@/assets/IMG_4904.jpeg.asset.json";
 import w3 from "@/assets/IMG_4903.jpeg.asset.json";
@@ -14,16 +29,35 @@ import w5 from "@/assets/IMG_4901.jpeg.asset.json";
 import w6 from "@/assets/IMG_4919.jpeg.asset.json";
 import w7 from "@/assets/IMG_4920.jpeg.asset.json";
 import w8 from "@/assets/IMG_4918.jpeg.asset.json";
+import w9 from "@/assets/IMG_4917.jpeg.asset.json";
+import n9 from "@/assets/IMG_4935.jpeg.asset.json";
+import n10 from "@/assets/IMG_4936.jpeg.asset.json";
 
 import t1 from "@/assets/IMG_4913.jpeg.asset.json";
+import t2 from "@/assets/IMG_4914.jpeg.asset.json";
+import t3 from "@/assets/IMG_4912.jpeg.asset.json";
+import t4 from "@/assets/IMG_4911.jpeg.asset.json";
 import t5 from "@/assets/IMG_4910.jpeg.asset.json";
+import t6 from "@/assets/IMG_4909.jpeg.asset.json";
 import t7 from "@/assets/IMG_4915.jpeg.asset.json";
 import t8 from "@/assets/IMG_4916.jpeg.asset.json";
+import t9 from "@/assets/IMG_4925.jpeg.asset.json";
+import t10 from "@/assets/IMG_4924.jpeg.asset.json";
+import t11 from "@/assets/IMG_4922.jpeg.asset.json";
+import t12 from "@/assets/IMG_4921.jpeg.asset.json";
 import n8 from "@/assets/IMG_4937.jpeg.asset.json";
+import n1 from "@/assets/IMG_4945.jpeg.asset.json";
+import n2 from "@/assets/IMG_4944.jpeg.asset.json";
+import n3 from "@/assets/IMG_4943.jpeg.asset.json";
+import n5 from "@/assets/IMG_4940.jpeg.asset.json";
+import n6 from "@/assets/IMG_4939.jpeg.asset.json";
 
 
 import h1 from "@/assets/20201125_125240.jpeg.asset.json";
+import h2 from "@/assets/20201125_125246.jpeg.asset.json";
+import h3 from "@/assets/20201105_221450.jpeg.asset.json";
 import h4 from "@/assets/20190331_094817.jpeg.asset.json";
+import h5 from "@/assets/20201126_145942.jpeg.asset.json";
 import h6 from "@/assets/20201212_082846.jpeg.asset.json";
 
 const CANOPY_SIZES = ["10x10", "10x20", "10x30", "10x40", "20x20", "20x30", "20x40"];
@@ -76,11 +110,16 @@ export const Route = createFileRoute("/rentals")({
 
 function Rentals() {
   const { t } = useLang();
+  const [album, setAlbum] = useState<{ title: string; photos: string[] } | null>(null);
+  const [idx, setIdx] = useState(0);
+
+  const openAlbum = (title: string, photos: string[]) => { setAlbum({ title, photos }); setIdx(0); };
 
   const CATS = [
     {
       img: a1.url,
       title: t("Tables & Chairs", "Mesas y Sillas"),
+      photos: [a1.url, a2.url, a3.url, a8.url, a9.url, a10.url],
       items: [
         t("White chairs, black chairs & white resting chairs", "Sillas blancas, negras y sillas de descanso blancas"),
         t("Round banquet tables (60\" / 72\")", "Mesas redondas de banquete (60\" / 72\")"),
@@ -93,6 +132,7 @@ function Rentals() {
     {
       img: t5.url,
       title: t("Tents & Canopies", "Carpas y Toldos"),
+      photos: [t1.url, t2.url, t3.url, t4.url, t5.url, t6.url, t9.url, t10.url, t11.url, t12.url, n1.url, n2.url, n3.url, n5.url, n6.url],
       items: [
         t("10x10, 10x20, 10x30, 10x40 canopies", "Toldos 10x10, 10x20, 10x30, 10x40"),
         t("20x20, 20x30, 20x40 and larger tents", "Carpas 20x20, 20x30, 20x40 y más grandes"),
@@ -104,6 +144,7 @@ function Rentals() {
     {
       img: a7.url,
       title: t("Lighting, Sound & Stage", "Iluminación, Sonido y Escenario"),
+      photos: [a7.url, m7.url, m9.url, m1.url, m2.url, m3.url, m4.url, m5.url, m6.url],
       items: [
         t("Giant light-up marquee letters & numbers", "Letras y números luminosos gigantes"),
         t("Custom names, XV, 18, 50 and more", "Nombres personalizados, XV, 18, 50 y más"),
@@ -115,6 +156,7 @@ function Rentals() {
     {
       img: a4.url,
       title: t("Backdrops", "Fondos (Backdrops)"),
+      photos: [a4.url, a5.url, m3.url, m7.url, m2.url, n2.url],
       items: [
         t("Backdrops", "Backdrops"),
         t("Shimmer walls & sequin panels", "Paredes brillantes y paneles de lentejuela"),
@@ -125,6 +167,7 @@ function Rentals() {
     {
       img: w1.url,
       title: t("Waterslides & Jumpers", "Resbaladillas y Brincolines"),
+      photos: [w1.url, w2.url, w3.url, w4.url, w5.url, w6.url, w7.url, w8.url, w9.url, n8.url, n9.url, n10.url],
       items: [
         t("Bounce houses & castle jumpers", "Brincolines y castillos inflables"),
         t("Combo jumpers with slides", "Combos con resbaladilla"),
@@ -135,6 +178,7 @@ function Rentals() {
     {
       img: a6.url,
       title: t("Machines & Catering", "Máquinas y Banquetes"),
+      photos: [t7.url, t8.url, a6.url],
       items: [
         t("Margarita & slushy machines", "Máquinas de margaritas y raspados"),
         t("Snow cone machine", "Máquina de raspados / conos de nieve"),
@@ -224,15 +268,15 @@ function Rentals() {
           <ul className="mt-4 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">
             <li className="flex items-start gap-2">
               <Truck className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              {t("Delivery and pickup are both charged based on how far your event is from our location.", "La entrega y la recolección tienen un cargo según la distancia de su evento desde nuestra ubicación.")}
+              {t("Delivery and pickup fees are charged based on the amount of rentals and how far your event is from our location.", "Las tarifas de entrega y recolección se cobran según la cantidad de rentas y la distancia de su evento desde nuestra ubicación.")}
             </li>
             <li className="flex items-start gap-2">
               <ArrowUp className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              {t("Let us know if setup is ground level or upper level / stairs.", "Avísenos si la instalación es a nivel de suelo o en un nivel superior / escaleras.")}
+              {t("Fees also depend on whether the setup is ground level or upper level / stairs.", "La tarifa también depende de si la instalación es a nivel de suelo o en un nivel superior / escaleras.")}
             </li>
             <li className="flex items-start gap-2">
               <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              {t("Setup and breakdown are included with most rentals.", "La instalación y desmontaje están incluidos en la mayoría de las rentas.")}
+              {t("Setup and breakdown services are available upon request for an extra cost.", "Los servicios de instalación y desmontaje están disponibles bajo pedido por un costo adicional.")}
             </li>
           </ul>
         </div>
@@ -241,9 +285,21 @@ function Rentals() {
       <section className="mx-auto max-w-7xl px-5 md:px-8 pb-16 grid gap-8 md:grid-cols-2">
         {CATS.map((c) => (
           <article key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card/40">
-            <img src={c.img} alt={c.title} className="w-full h-64 object-cover" loading="lazy" width={1200} height={900} />
+            <button
+              type="button"
+              onClick={() => openAlbum(c.title, c.photos)}
+              className="group relative block w-full"
+              aria-label={t(`View ${c.title} photos`, `Ver fotos de ${c.title}`)}
+            >
+              <img src={c.img} alt={c.title} className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width={1200} height={900} />
+              <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/80 border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary">
+                <Images className="w-3.5 h-3.5" /> {c.photos.length} {t("photos", "fotos")}
+              </span>
+            </button>
             <div className="p-6">
-              <h3 className="font-display text-2xl">{c.title}</h3>
+              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="font-display text-2xl text-left hover:text-primary transition-colors">
+                {c.title}
+              </button>
               <ul className="mt-4 space-y-2">
                 {c.items.map((i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -251,8 +307,13 @@ function Rentals() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                 <Phone className="w-3 h-3" /> {t("Call for pricing", "Llame por precios")}
+              </div>
+              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="text-sm text-primary hover:underline">
+                {t("See options →", "Ver opciones →")}
+              </button>
               </div>
             </div>
           </article>
@@ -364,6 +425,55 @@ function Rentals() {
           <Link to="/quote" className="mt-6 inline-flex rounded-full bg-gradient-gold text-primary-foreground px-6 py-3 font-semibold shadow-gold">{t("Build my package", "Armar mi paquete")}</Link>
         </div>
       </section>
+
+      {album && (
+        <div className="fixed inset-0 z-[60] bg-background/95 backdrop-blur overflow-y-auto p-4 md:p-8" onClick={() => setAlbum(null)}>
+          <div className="mx-auto max-w-5xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="font-display text-2xl">{album.title}</h2>
+              <button onClick={() => setAlbum(null)} aria-label={t("Close", "Cerrar")} className="p-2 text-foreground hover:text-primary">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="relative mt-4">
+              <img src={album.photos[idx]} alt={`${album.title} ${idx + 1}`} className="w-full max-h-[65vh] object-contain rounded-xl border border-border bg-card" />
+              {album.photos.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setIdx((i) => (i - 1 + album.photos.length) % album.photos.length)}
+                    aria-label={t("Previous", "Anterior")}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 border border-border p-2 hover:text-primary"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={() => setIdx((i) => (i + 1) % album.photos.length)}
+                    aria-label={t("Next", "Siguiente")}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 border border-border p-2 hover:text-primary"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </>
+              )}
+            </div>
+            <div className="mt-4 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+              {album.photos.map((p, i) => (
+                <button key={p + i} onClick={() => setIdx(i)} className={`overflow-hidden rounded-lg border ${i === idx ? "border-primary" : "border-border"}`}>
+                  <img src={p} alt="" className="h-16 w-full object-cover" loading="lazy" />
+                </button>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3 justify-center pb-6">
+              <a href={PHONE_HREF} className="inline-flex items-center gap-2 rounded-full bg-gradient-gold text-primary-foreground px-6 py-3 text-sm font-semibold shadow-gold">
+                <Phone className="w-4 h-4" /> {PHONE}
+              </a>
+              <Link to="/quote" className="inline-flex items-center rounded-full border border-primary/50 px-6 py-3 text-sm font-semibold text-foreground hover:bg-primary/10">
+                {t("Request a Quote", "Pedir Cotización")}
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

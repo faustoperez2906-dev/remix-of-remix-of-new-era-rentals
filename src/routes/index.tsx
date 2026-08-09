@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Layout, PHONE, PHONE_HREF } from "@/components/Layout";
 import { useLang } from "@/lib/i18n";
-import { ArrowRight, Sparkles, ShieldCheck, Star, Phone } from "lucide-react";
+import { ArrowRight, Sparkles, Truck, Star, Phone } from "lucide-react";
 import heroAsset from "@/assets/IMG_4867.jpg.asset.json";
 import g1Asset from "@/assets/IMG_4869.jpg.asset.json";
 import g2Asset from "@/assets/IMG_4867.jpg.asset.json";
@@ -76,7 +76,7 @@ function Home() {
         <div className="mx-auto max-w-7xl px-5 md:px-8 py-10 grid gap-8 md:grid-cols-3">
           {[
             { icon: Sparkles, title: t("Curated Luxury", "Lujo Seleccionado"), body: t("White chairs, black chairs, resting chairs, elegant canopies and linens.", "Sillas blancas, negras, de descanso, toldos elegantes y manteles.") },
-            { icon: ShieldCheck, title: t("Fully Insured", "Totalmente Asegurados"), body: t("Professional delivery, setup and pickup — stress-free.", "Entrega, instalación y recolección profesional — sin estrés.") },
+            { icon: Truck, title: t("Delivery & Pickup", "Entrega y Recolección"), body: t("Delivery and pickup fees are based on the amount of rentals, ground or upper level setup, and distance from our location. Setup and breakdown services are available upon request for an extra cost.", "Las tarifas de entrega y recolección dependen de la cantidad de rentas, si la instalación es a nivel de suelo o superior, y la distancia desde nuestra ubicación. Los servicios de instalación y desmontaje están disponibles bajo pedido por un costo adicional.") },
             { icon: Star, title: t("5-Star Service", "Servicio 5 Estrellas"), body: t("Local East LA team obsessed with your event's success.", "Equipo local del Este de LA dedicado al éxito de su evento.") },
           ].map(({ icon: Icon, title, body }) => (
             <div key={title} className="flex gap-4">
