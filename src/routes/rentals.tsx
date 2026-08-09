@@ -80,7 +80,7 @@ const MACHINES = [
 ];
 
 const MACHINE_EXTRAS = [
-  { icon: Snowflake, name: "Snow Cone Machine", en: "Syrups, cups & spoons available.", es: "Jarabes, vasos y cucharas disponibles." },
+  { icon: Snowflake, name: "Snow Cone Machine", en: "Shaved ice machine available for rent.", es: "Máquina de hielo raspado disponible para renta." },
   { icon: Coffee, name: "Coffee Maker Machine", en: "Large-batch brewer for 100+ cups.", es: "Cafetera grande para más de 100 tazas." },
   { icon: Crown, name: "Throne Chairs", en: "Gold and white thrones for the guest of honor.", es: "Tronos dorados y blancos para el festejado." },
 ];
