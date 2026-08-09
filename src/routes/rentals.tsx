@@ -268,15 +268,15 @@ function Rentals() {
           <ul className="mt-4 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">
             <li className="flex items-start gap-2">
               <Truck className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              {t("Delivery and pickup are both charged based on how far your event is from our location.", "La entrega y la recolección tienen un cargo según la distancia de su evento desde nuestra ubicación.")}
+              {t("Delivery and pickup fees are charged based on the amount of rentals and how far your event is from our location.", "Las tarifas de entrega y recolección se cobran según la cantidad de rentas y la distancia de su evento desde nuestra ubicación.")}
             </li>
             <li className="flex items-start gap-2">
               <ArrowUp className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              {t("Let us know if setup is ground level or upper level / stairs.", "Avísenos si la instalación es a nivel de suelo o en un nivel superior / escaleras.")}
+              {t("Fees also depend on whether the setup is ground level or upper level / stairs.", "La tarifa también depende de si la instalación es a nivel de suelo o en un nivel superior / escaleras.")}
             </li>
             <li className="flex items-start gap-2">
               <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              {t("Setup and breakdown are included with most rentals.", "La instalación y desmontaje están incluidos en la mayoría de las rentas.")}
+              {t("Setup and breakdown services are available upon request for an extra cost.", "Los servicios de instalación y desmontaje están disponibles bajo pedido por un costo adicional.")}
             </li>
           </ul>
         </div>
@@ -285,9 +285,21 @@ function Rentals() {
       <section className="mx-auto max-w-7xl px-5 md:px-8 pb-16 grid gap-8 md:grid-cols-2">
         {CATS.map((c) => (
           <article key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card/40">
-            <img src={c.img} alt={c.title} className="w-full h-64 object-cover" loading="lazy" width={1200} height={900} />
+            <button
+              type="button"
+              onClick={() => openAlbum(c.title, c.photos)}
+              className="group relative block w-full"
+              aria-label={t(`View ${c.title} photos`, `Ver fotos de ${c.title}`)}
+            >
+              <img src={c.img} alt={c.title} className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width={1200} height={900} />
+              <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/80 border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary">
+                <Images className="w-3.5 h-3.5" /> {c.photos.length} {t("photos", "fotos")}
+              </span>
+            </button>
             <div className="p-6">
-              <h3 className="font-display text-2xl">{c.title}</h3>
+              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="font-display text-2xl text-left hover:text-primary transition-colors">
+                {c.title}
+              </button>
               <ul className="mt-4 space-y-2">
                 {c.items.map((i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -295,8 +307,13 @@ function Rentals() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                 <Phone className="w-3 h-3" /> {t("Call for pricing", "Llame por precios")}
+              </div>
+              <button type="button" onClick={() => openAlbum(c.title, c.photos)} className="text-sm text-primary hover:underline">
+                {t("See options →", "Ver opciones →")}
+              </button>
               </div>
             </div>
           </article>
