@@ -76,6 +76,7 @@ const INFLATABLES = [
 
 const MACHINES = [
   { img: t7.url, name: "Double Margarita / Slushy Machine", en: "Two flavors • mixes available on request", es: "Dos sabores • mezclas disponibles" },
+  { img: a6.url, name: "Catering & Serving Setup", en: "Chafing dishes, glassware & flatware", es: "Baños maría, cristalería y cubiertos" },
 ];
 
 const MACHINE_EXTRAS = [
@@ -116,9 +117,9 @@ function Rentals() {
       title: t("Tables & Chairs", "Mesas y Sillas"),
       photos: [a1.url, a2.url, a3.url, a8.url, a9.url, a10.url],
       items: [
-        t("White chairs, black chairs & white resting chairs", "Sillas blancas, negras y sillas de descanso blancas"),
-        t("Round banquet tables (60\" / 72\")", "Mesas redondas de banquete (60\" / 72\")"),
-        t("Rectangular banquet tables", "Mesas rectangulares de banquete"),
+        t("White resin chairs", "Sillas de resina blancas"),
+        t("Round banquet tables (48\" / 60\")", "Mesas redondas de banquete (48\" / 60\")"),
+        t("Rectangular tables — 4ft, 6ft & 8ft", "Mesas rectangulares — 4, 6 y 8 pies"),
         t("Kids tables & chairs", "Mesas y sillas para niños"),
         t("Barstools & cocktail tables", "Bancos altos y mesas de cóctel"),
         t("Linen chair covers, linens & runners", "Fundas de tela para sillas, manteles y caminos"),
@@ -176,6 +177,7 @@ function Rentals() {
       img: a6.url,
       title: t("Machines & Catering", "Máquinas y Banquetes"),
       photos: [t7.url, a6.url],
+      products: MACHINES,
       items: [
         t("Margarita & slushy machines", "Máquinas de margaritas y raspados"),
         t("Snow cone machine", "Máquina de raspados / conos de nieve"),
@@ -323,17 +325,6 @@ function Rentals() {
           </article>
         ))}
       </section>
-
-      {section(
-        "machines",
-        t("Machines", "Máquinas"),
-        t("Margarita, slushy & more", "Margaritas, raspados y más"),
-        t(
-          "Frozen drink machines delivered ready to serve, plus snow cone and coffee machines on request.",
-          "Máquinas de bebidas congeladas listas para servir, además de máquinas de raspados y café bajo pedido.",
-        ),
-        MACHINES,
-      )}
 
       <section className="mx-auto max-w-7xl px-5 md:px-8 pb-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {MACHINE_EXTRAS.map((m) => (
