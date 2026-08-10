@@ -39,7 +39,7 @@ function AuthPage() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: { emailRedirectTo: window.location.origin + "/admin/quotes" },
+        options: { emailRedirectTo: window.location.origin },
       });
       setBusy(false);
       if (error) return setMsg(error.message);
