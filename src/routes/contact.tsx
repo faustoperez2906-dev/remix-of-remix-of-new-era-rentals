@@ -27,7 +27,7 @@ export const Route = createFileRoute("/contact")({
         url: "",
         priceRange: "$$",
         openingHours: "Mo-Su 09:00-18:00",
-        sameAs: [IG],
+        sameAs: [IG, FB],
       }),
     }],
   }),
@@ -68,13 +68,13 @@ function Contact() {
               <div className="text-lg font-semibold text-foreground group-hover:text-primary break-all">{EMAIL}</div>
             </div>
           </a>
-          <a href={IG} target="_blank" rel="noreferrer" className="flex items-start gap-4 group">
+          <a href={FB} target="_blank" rel="noreferrer" className="flex items-start gap-4 group">
             <div className="w-11 h-11 rounded-full bg-primary/10 border border-primary/40 flex items-center justify-center">
-              <Instagram className="w-5 h-5 text-primary" />
+              <Facebook className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">Instagram</div>
-              <div className="text-lg font-semibold text-foreground group-hover:text-primary">@newerapartyrentals</div>
+              <div className="text-xs uppercase tracking-widest text-muted-foreground">Facebook</div>
+              <div className="text-lg font-semibold text-foreground group-hover:text-primary">New Era Party & Event Rentals</div>
             </div>
           </a>
           <div className="flex items-start gap-4">
