@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Layout, PHONE, PHONE_HREF, EMAIL, IG } from "@/components/Layout";
+import { Layout, PHONE, PHONE_HREF, EMAIL } from "@/components/Layout";
 import { useLang } from "@/lib/i18n";
-import { Phone, Mail, Instagram, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, Instagram, MapPin, Clock, Facebook } from "lucide-react";
+
+const IG = "https://www.instagram.com/newerapartyrentals?igsh=NTc4MTlwNjQ2YQ==";
+const FB = "https://www.facebook.com/newerapartyrentals/";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
