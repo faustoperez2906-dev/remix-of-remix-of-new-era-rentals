@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Layout, PHONE, PHONE_HREF, EMAIL, IG } from "@/components/Layout";
+import { Layout, PHONE, PHONE_HREF, EMAIL } from "@/components/Layout";
 import { useLang } from "@/lib/i18n";
-import { Phone, Mail, Instagram, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, Instagram, MapPin, Clock, Facebook } from "lucide-react";
+
+const IG = "https://www.instagram.com/newerapartyrentals?igsh=NTc4MTlwNjQ2YQ==";
+const FB = "https://www.facebook.com/newerapartyrentals/";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -24,7 +27,7 @@ export const Route = createFileRoute("/contact")({
         url: "",
         priceRange: "$$",
         openingHours: "Mo-Su 09:00-18:00",
-        sameAs: [IG],
+        sameAs: [IG, FB],
       }),
     }],
   }),
@@ -72,6 +75,15 @@ function Contact() {
             <div>
               <div className="text-xs uppercase tracking-widest text-muted-foreground">Instagram</div>
               <div className="text-lg font-semibold text-foreground group-hover:text-primary">@newerapartyrentals</div>
+            </div>
+          </a>
+          <a href={FB} target="_blank" rel="noreferrer" className="flex items-start gap-4 group">
+            <div className="w-11 h-11 rounded-full bg-primary/10 border border-primary/40 flex items-center justify-center">
+              <Facebook className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-widest text-muted-foreground">Facebook</div>
+              <div className="text-lg font-semibold text-foreground group-hover:text-primary">New Era Party & Event Rentals</div>
             </div>
           </a>
           <div className="flex items-start gap-4">

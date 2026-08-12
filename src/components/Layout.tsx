@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, Instagram, MapPin, Menu, X, Globe } from "lucide-react";
+import { Phone, Mail, Instagram, MapPin, Menu, X, Globe, Facebook } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import logoAsset from "@/assets/logo.png.asset.json";
 import { useLang } from "@/lib/i18n";
@@ -7,7 +7,8 @@ import { useLang } from "@/lib/i18n";
 const PHONE = "(323) 480-0660";
 const PHONE_HREF = "tel:+13234800660";
 const EMAIL = "Newerapartyrentals@yahoo.com";
-const IG = "https://www.instagram.com/newerapartyrentals";
+const IG = "https://www.instagram.com/newerapartyrentals?igsh=NTc4MTlwNjQ2YQ==";
+const FB = "https://www.facebook.com/newerapartyrentals/";
 
 const nav = [
   { to: "/", label: "Home", es: "Inicio" },
@@ -118,6 +119,7 @@ export function Layout({ children }: { children: ReactNode }) {
               <li className="flex items-start gap-2"><Phone className="w-4 h-4 mt-0.5 text-primary" /><a href={PHONE_HREF} className="hover:text-primary">{PHONE}</a></li>
               <li className="flex items-start gap-2"><Mail className="w-4 h-4 mt-0.5 text-primary" /><a href={`mailto:${EMAIL}`} className="hover:text-primary break-all">{EMAIL}</a></li>
               <li className="flex items-start gap-2"><Instagram className="w-4 h-4 mt-0.5 text-primary" /><a href={IG} target="_blank" rel="noreferrer" className="hover:text-primary">@newerapartyrentals</a></li>
+              <li className="flex items-start gap-2"><Facebook className="w-4 h-4 mt-0.5 text-primary" /><a href={FB} target="_blank" rel="noreferrer" className="hover:text-primary">Facebook</a></li>
               <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-primary" />4536 Whittier Blvd, Los Angeles, CA 90023</li>
             </ul>
           </div>
