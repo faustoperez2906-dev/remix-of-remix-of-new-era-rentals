@@ -18,8 +18,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "New Era Party & Event Rentals | Luxury LA Party Rentals" },
       { name: "description", content: "Luxury tents, chairs, tables, linens, lighting & more for weddings, quinceañeras and events in Los Angeles. Free quote — call (323) 480-0660." },
-      { property: "og:title", content: "New Era Party & Event Rentals" },
-      { property: "og:description", content: "Luxury party & event rentals in East Los Angeles." },
+      { property: "og:title", content: "New Era Party & Event Rentals | Luxury LA Party Rentals" },
+      { property: "og:description", content: "Luxury tents, chairs, tables, linens, lighting & more for weddings, quinceañeras and events in Los Angeles. Free quote — call (323) 480-0660." },
     ],
   }),
   component: Home,
