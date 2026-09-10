@@ -1,2 +1,2 @@
-- [ ] Add uploaded promotional rental images to appropriate rental galleries
+- [x] Add uploaded promotional rental images to appropriate rental galleries
 - [ ] Add customer payment collection flow after payment type is selected

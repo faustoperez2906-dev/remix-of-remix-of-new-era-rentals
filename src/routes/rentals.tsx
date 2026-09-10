@@ -58,6 +58,17 @@ import h3 from "@/assets/20201105_221450.jpeg.asset.json";
 import h4 from "@/assets/20190331_094817.jpeg.asset.json";
 import h5 from "@/assets/20201126_145942.jpeg.asset.json";
 import h6 from "@/assets/20201212_082846.jpeg.asset.json";
+import promoTables from "@/assets/IMG_5162.webp.asset.json";
+import promoMarquee from "@/assets/IMG_5163.png.asset.json";
+import promoCanopies from "@/assets/IMG_5164.webp.asset.json";
+import promoWaterSlides from "@/assets/IMG_5165.webp.asset.json";
+import promoBarTables from "@/assets/IMG_5166.webp.asset.json";
+import promoDraping from "@/assets/IMG_5167.webp.asset.json";
+import promoJumpers from "@/assets/IMG_5168.webp.asset.json";
+import promoUmbrellas from "@/assets/IMG_5169.webp.asset.json";
+import promoMachines from "@/assets/IMG_5170.webp.asset.json";
+import promoCocktailTables from "@/assets/IMG_5171.webp.asset.json";
+import promoHeaters from "@/assets/IMG_5172.webp.asset.json";
 
 const CANOPY_SIZES = ["10x10", "10x20", "10x30", "10x40", "20x20", "20x30", "20x40"];
 
@@ -86,6 +97,8 @@ const MACHINE_EXTRAS = [
 ];
 
 const HEATERS = [
+  { img: promoHeaters.url, name: "Propane Patio Heaters", en: "Pyramid and standing heaters available", es: "Calentadores piramidales y de pie disponibles" },
+  { img: promoUmbrellas.url, name: "9ft Patio Umbrellas with Stands", en: "Multiple colors available for outdoor events", es: "Varios colores disponibles para eventos al aire libre" },
   { img: h1.url, name: "Pyramid Flame Patio Heater", en: "Glass tower flame • propane on request", es: "Torre de flama • propano bajo pedido" },
   { img: h4.url, name: "Standing Patio Heater", en: "Covers about a 15ft circle of warmth", es: "Calienta un círculo de unos 15 pies" },
   { img: h6.url, name: "Champion Power Generators", en: "3500-4000W • power lights, machines & music", es: "3500-4000W • luces, máquinas y música" },
@@ -98,6 +111,8 @@ export const Route = createFileRoute("/rentals")({
       { name: "description", content: "Browse our rental catalog: 10x10 to 20x40 canopies, draping, chairs, barstools, linen chair covers, backdrops, inflatables, sound, lighting, stage, margarita and snow cone machines, patio heaters and throne chairs." },
       { property: "og:title", content: "Party Rentals in Los Angeles" },
       { property: "og:description", content: "Canopies, inflatables, sound, lighting, stage, machines and more." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Rentals,
@@ -113,9 +128,9 @@ function Rentals() {
 
   const CATS: { img: string; title: string; photos: string[]; items: string[]; sizes?: string[]; products?: AlbumProduct[] }[] = [
     {
-      img: a1.url,
+      img: promoTables.url,
       title: t("Tables & Chairs", "Mesas y Sillas"),
-      photos: [a1.url, a2.url, a3.url, a8.url, a9.url, a10.url],
+      photos: [promoTables.url, promoCocktailTables.url, promoBarTables.url, a1.url, a2.url, a3.url, a8.url, a9.url, a10.url],
       items: [
         t("White resin chairs", "Sillas de resina blancas"),
         t("Round banquet tables (48\" / 60\")", "Mesas redondas de banquete (48\" / 60\")"),
@@ -126,9 +141,9 @@ function Rentals() {
       ],
     },
     {
-      img: t5.url,
+      img: promoCanopies.url,
       title: t("Tents & Canopies", "Carpas y Toldos"),
-      photos: [t1.url, t2.url, t3.url, t4.url, t5.url, t6.url, t9.url, t10.url, t11.url, t12.url, n1.url, n2.url, n3.url, n5.url, n6.url],
+      photos: [promoCanopies.url, promoDraping.url, t1.url, t2.url, t3.url, t4.url, t5.url, t6.url, t9.url, t10.url, t11.url, t12.url, n1.url, n2.url, n3.url, n5.url, n6.url],
       sizes: CANOPY_SIZES,
       items: [
         t("10x10, 10x20, 10x30, 10x40 canopies", "Toldos 10x10, 10x20, 10x30, 10x40"),
@@ -139,9 +154,9 @@ function Rentals() {
       ],
     },
     {
-      img: a7.url,
+      img: promoMarquee.url,
       title: t("Lighting, Sound & Stage", "Iluminación, Sonido y Escenario"),
-      photos: [a7.url, m7.url, m9.url, m1.url, m2.url, m3.url, m4.url, m5.url, m6.url],
+      photos: [promoMarquee.url, a7.url, m7.url, m9.url, m1.url, m2.url, m3.url, m4.url, m5.url, m6.url],
       items: [
         t("Giant light-up marquee letters & numbers", "Letras y números luminosos gigantes"),
         t("Custom names, XV, 18, 50 and more", "Nombres personalizados, XV, 18, 50 y más"),
@@ -162,9 +177,9 @@ function Rentals() {
       ],
     },
     {
-      img: w1.url,
+      img: promoWaterSlides.url,
       title: t("Waterslides & Jumpers", "Resbaladillas y Brincolines"),
-      photos: [...INFLATABLES.map((i) => i.img), w9.url, n9.url, n10.url],
+      photos: [...INFLATABLES.map((i) => i.img), promoWaterSlides.url, promoJumpers.url, w9.url, n9.url, n10.url],
       products: INFLATABLES,
       items: [
         t("Bounce houses & castle jumpers", "Brincolines y castillos inflables"),
@@ -174,9 +189,9 @@ function Rentals() {
       ],
     },
     {
-      img: t7.url,
+      img: promoMachines.url,
       title: t("Machines & Catering", "Máquinas y Banquetes"),
-      photos: [t7.url, a6.url],
+      photos: [t7.url, a6.url, promoMachines.url],
       products: MACHINES,
       items: [
         t("Margarita & slushy machines", "Máquinas de margaritas y raspados"),
