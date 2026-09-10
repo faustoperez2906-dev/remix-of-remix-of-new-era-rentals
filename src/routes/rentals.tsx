@@ -305,7 +305,7 @@ function Rentals() {
               className="group relative block w-full"
               aria-label={t(`View ${c.title} photos`, `Ver fotos de ${c.title}`)}
             >
-              <img src={c.img} alt={c.title} className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width={1200} height={900} />
+              <img src={c.img} alt={c.title} className="w-full h-64 object-contain bg-card transition-transform duration-700 group-hover:scale-[1.02]" loading="lazy" width={1200} height={900} />
               <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/80 border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary">
                 <Images className="w-3.5 h-3.5" /> {c.photos.length} {t("photos", "fotos")}
               </span>
