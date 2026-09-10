@@ -111,6 +111,8 @@ export const Route = createFileRoute("/rentals")({
       { name: "description", content: "Browse our rental catalog: 10x10 to 20x40 canopies, draping, chairs, barstools, linen chair covers, backdrops, inflatables, sound, lighting, stage, margarita and snow cone machines, patio heaters and throne chairs." },
       { property: "og:title", content: "Party Rentals in Los Angeles" },
       { property: "og:description", content: "Canopies, inflatables, sound, lighting, stage, machines and more." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Rentals,
