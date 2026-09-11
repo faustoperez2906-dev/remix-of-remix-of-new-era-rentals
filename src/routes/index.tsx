@@ -3,14 +3,14 @@ import { Layout, PHONE, PHONE_HREF } from "@/components/Layout";
 import { useLang } from "@/lib/i18n";
 import { ArrowRight, Sparkles, Truck, Star, Phone } from "lucide-react";
 import heroAsset from "@/assets/IMG_4867.jpg.asset.json";
-import g1Asset from "@/assets/IMG_4869.jpg.asset.json";
-import g2Asset from "@/assets/IMG_4867.jpg.asset.json";
-import g3Asset from "@/assets/IMG_4865.jpg.asset.json";
+import promoTablesAsset from "@/assets/IMG_5162.webp.asset.json";
+import promoMarqueeAsset from "@/assets/IMG_5163.png.asset.json";
+import promoDrapingAsset from "@/assets/IMG_5167.webp.asset.json";
 import mascotAsset from "@/assets/mascot.png.asset.json";
 const hero = heroAsset.url;
-const g1 = g1Asset.url;
-const g2 = g2Asset.url;
-const g3 = g3Asset.url;
+const g1 = promoMarqueeAsset.url;
+const g2 = promoTablesAsset.url;
+const g3 = promoDrapingAsset.url;
 
 
 export const Route = createFileRoute("/")({

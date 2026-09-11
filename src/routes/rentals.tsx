@@ -99,8 +99,6 @@ const MACHINE_EXTRAS = [
 const HEATERS = [
   { img: promoHeaters.url, name: "Propane Patio Heaters", en: "Pyramid and standing heaters available", es: "Calentadores piramidales y de pie disponibles" },
   { img: promoUmbrellas.url, name: "9ft Patio Umbrellas with Stands", en: "Multiple colors available for outdoor events", es: "Varios colores disponibles para eventos al aire libre" },
-  { img: h1.url, name: "Pyramid Flame Patio Heater", en: "Glass tower flame • propane on request", es: "Torre de flama • propano bajo pedido" },
-  { img: h4.url, name: "Standing Patio Heater", en: "Covers about a 15ft circle of warmth", es: "Calienta un círculo de unos 15 pies" },
   { img: h6.url, name: "Champion Power Generators", en: "3500-4000W • power lights, machines & music", es: "3500-4000W • luces, máquinas y música" },
 ];
 
