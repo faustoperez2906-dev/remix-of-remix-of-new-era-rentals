@@ -216,7 +216,7 @@ function Rentals() {
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((s) => (
           <article key={s.name} className="group rounded-2xl overflow-hidden border border-border bg-card/40">
-            <img src={s.img} alt={s.name} className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width={1200} height={900} />
+            <img src={s.img} alt={s.name} className="w-full h-56 object-contain bg-card transition-transform duration-700 group-hover:scale-[1.02]" loading="lazy" width={1200} height={900} />
             <div className="p-5">
               <h3 className="font-display text-xl">{s.name}</h3>
               <p className="text-sm text-muted-foreground mt-1">{t(s.en, s.es)}</p>
@@ -417,7 +417,7 @@ function Rentals() {
             <div className="mt-4 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
               {album.photos.map((p, i) => (
                 <button key={p + i} onClick={() => setIdx(i)} className={`overflow-hidden rounded-lg border ${i === idx ? "border-primary" : "border-border"}`}>
-                  <img src={p} alt="" className="h-16 w-full object-cover" loading="lazy" />
+                  <img src={p} alt="" className="h-16 w-full object-contain bg-card" loading="lazy" />
                 </button>
               ))}
             </div>
