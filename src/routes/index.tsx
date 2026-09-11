@@ -108,7 +108,7 @@ function Home() {
             { img: g3, title: t("Backdrops & Decor", "Backdrops y Decoración"), body: t("Backdrops, throne chairs, draping & linens.", "Backdrops, sillas de trono, draping y manteles.") },
           ].map((c) => (
             <Link key={c.title} to="/rentals" className="group relative overflow-hidden rounded-2xl border border-border">
-              <img src={c.img} alt={c.title} className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width={1200} height={900} />
+              <img src={c.img} alt={c.title} className="w-full h-72 object-contain bg-card transition-transform duration-700 group-hover:scale-[1.02]" loading="lazy" width={1200} height={900} />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6">
                 <div className="font-display text-2xl text-foreground">{c.title}</div>
